@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
+        crossorigin="anonymous">
+    <style>
+        canvas.drawing,
+        canvas.drawingBuffer {
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="contenedor">
+        <div id="scanner-container"></div>
+        <p id="imprime"></p>
+    </div>
+    <div id="contenedorinfo" style="text-align:center;">
+        <div id="dvActivofijo">
+            <label for="Activofijo">
+                <b>Activo Fijo: </b>
+            </label>
+            <p id="Activofijo"></p>
+        </div>
+
+        <div id="dvSociedad">
+            <label for="Sociedad">
+                <b>Sociedad: </b>
+            </label>
+            <p id="Sociedad"></p>
+        </div>
+
+        <div id="dvDepartamento">
+            <label for="Departamento">
+                <b>Departamento: </b>
+            </label>
+            <p id="Departamento"></p>
+        </div>
+
+        <div id="dvEjercicio">
+            <label for="Ejercicio">
+                <b>Ejercicio: </b>
+            </label>
+            <p id="Ejercicio"></p>
+        </div>
+
+        <div id="dvTipoAF">
+            <label for="TipoAF">
+                <b>Tipo de Activo Fijo: </b>
+            </label>
+            <p id="TipoAF"></p>
+        </div>
+        <div id="conMostrar" style="display:none;">
+            <div id="dvSubtipoAf">
+                <label for="selSubtipoAf">
+                    <b>Subtipo de Activo Fijo: </b>
+                </label>
+                <select name="TipoAf" id="selSubtipoAf">
+                    <option value="none" selected>--Subtipos--</option>
+                </select>
+            </div>
+
+            <div id="dvMarca">
+                <label for="selMarca">
+                    <b>Marca: </b>
+                </label>
+                <select name="Marca" id="selMarca">
+                    <option value="none" selected>--Marca--</option>
+                </select>
+            </div>
+
+            <div id="dvModelo">
+                <label for="selModelo">
+                    <b>Modelo: </b>
+                </label>
+                <select name="Modelo" id="selModelo">
+                    <option value="none" selected>--Modelo--</option>
+                </select>
+            </div>
+            <div id="dvNumserie">
+                <label for="selNumserie">
+                    <b>Numero de serie: </b>
+                </label>
+                <input id="selNumserie" type="text">
+            </div>
+
+            <div id="dvSO">
+                <label for="selSO">
+                    <b>Sistema Operativo: </b>
+                </label>
+                <select name="SO" id="selSO">
+                    <option value="none" selected>--SO--</option>
+                </select>
+            </div>
+
+            <div id="dvMemoria">
+                <label for="selMemoria">
+                    <b>Memoria: </b>
+                </label>
+                <input id="selMemoria" type="text">
+            </div>
+
+            <div id="dvDisco1">
+                <label for="selDisco1">
+                    <b>Disco 1: </b>
+                </label>
+                <select name="Disco1" id="selDisco1">
+                    <option value="none" selected>--Disco1--</option>
+                </select>
+            </div>
+
+            <div id="dvDisco2">
+                <label for="selDisco2">
+                    <b>Disco 2: </b>
+                </label>
+                <select name="Disco2" id="selDisco2">
+                    <option value="none" selected>--Disco2--</option>
+                </select>
+            </div>
+
+            <div id="dvDescripcion">
+                <label for="selDescripcion">
+                    <b>Descripción: </b>
+                </label>
+                <input id="selDescripcion" type="text">
+            </div>
+
+            <div id="dvPadre">
+                <label for="selPadre">
+                    <b>Lugar: </b>
+                </label>
+                <label id="selPadre" type="text">click!</label>
+            </div>
+        </div>
+<div id="infoPadre" >
+        <div id="divUsuario" style="display:none;">
+            <label for="selPadre">
+                <b>Usuario: </b>
+            </label>
+            <input type="text" id="usuarioElegido" list="personas" >
+            <datalist id="personas">
+            </datalist>
+        </div>
+        <div id="dvDescripcionPadre" style="display:none">
+                <label for="selDescripcionPadre">
+                    <b>Descripción: </b>
+                </label>
+                <input id="selDescripcionPadre" type="text">
+            </div>
+            <div id="dvhab" style="display:none">
+                    <label for="selhab">
+                        <b>Habitación: </b>
+                    </label>
+                    <label id="selhab" type="text">click!</label>
+                </div>
+        <div id="contPuesto" style="display:none;">
+
+
+        </div>
+        <div id="contHabitacion" style="display:none;">
+
+        </div>
+</div>
+        <button type="button" onclick="guardar()" id="btn_guardar" style="margin:50px;" class="btn btn-success">GUARDAR</button>
+        <button type="button" class="btn btn-primary" id="btn" value="" style="">Escanear</button>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdn.rawgit.com/serratus/quaggaJS/0420d5e0/dist/quagga.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="js/padre.js"></script>
+    <script src="js/opciones.js"></script>
+    <script src="js/js.js"></script>
+
+</body>
+
+</html>
