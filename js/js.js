@@ -654,3 +654,7 @@ document.getElementById("selhab").addEventListener("click", function () {
     }, 500);
 
 }, false);
+document.getElementById("btn").addEventListener("click", () => {
+    document.getElementById("scanner-container").style.display = "block";
+    startScanner();
+});
